@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <!-- Parameters to pass to the ROS node -->
+  <!--arg name="move_group" default="manipulator"/-->
+  <!-- arg name="ee_link" default="tool_link_ee"/-->
+  <arg name="ros_rate" default="0.1"/>
+  
+  
+  <!--  This loads the robot description  -->
+  <include file="$(find iiwa_gripper_moveit)/launch/moveit_planning_execution.launch">
+    <arg name="sim" value="false"/>
+  </include>
+
+  <!--include file="$(find iiwa_gripper_moveit)/launch/demo.launch"/-->
+
+    
+  <!-- Here we call the ROS node we have written, with the parameters on top   -->
+  <node ns="iiwa" name="SimpleMoveit" pkg="interface" type="simple_moveit.py" respawn="false" output="screen">
+    <!--param name="move_group" value="$(arg move_group)"/-->
+    <!--param name="ee_link" value="$(arg ee_link)"/-->
+    <param name="ros_rate" value="$(arg ros_rate)"/>
+  </node>
+  
+</launch>

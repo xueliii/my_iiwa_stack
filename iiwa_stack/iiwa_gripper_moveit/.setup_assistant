@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: iiwa_description
+    relative_path: urdf/iiwa14.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/iiwa14.srdf
+  CONFIG:
+    author_name: Shirley
+    author_email: xue.li@u.nus.edu
+    generated_timestamp: 1581939469

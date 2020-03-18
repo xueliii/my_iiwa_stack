@@ -1,0 +1,10 @@
+# Define the Goal
+GripperControl gripper_goal
+
+---
+# Define the Result
+GripperControl gripper_result
+
+---
+# Define a feedback message
+GripperControl gripper_feedback

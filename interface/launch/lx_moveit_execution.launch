@@ -16,7 +16,7 @@
 
     
   <!-- Here we call the ROS node we have written, with the parameters on top   -->
-  <node ns="iiwa" name="SimpleMoveit" pkg="interface" type="simple_moveit.py" respawn="false" output="screen">
+  <node ns="iiwa" name="lx_iiwa14" pkg="interface" type="lx_ActionHelper.py" respawn="false" output="screen">
     <!--param name="move_group" value="$(arg move_group)"/-->
     <!--param name="ee_link" value="$(arg ee_link)"/-->
     <param name="ros_rate" value="$(arg ros_rate)"/>

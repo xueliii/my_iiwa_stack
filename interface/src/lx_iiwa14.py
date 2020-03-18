@@ -13,8 +13,9 @@ from math import pi
 from std_msgs.msg import String
 from moveit_commander.conversions import pose_to_list
 
-ACCE = 0.05
-VELO = 0.03
+
+ACCE = 0.5
+VELO = 0.3
 
 def all_close(goal, actual, tolerance):
   """
@@ -77,8 +78,9 @@ class iiwa14():
         self.planning_frame = planning_frame
         self.eef_link = eef_link
         self.group_names = group_names
+        self.rate = rate
 
-        # self.move_group.setPlannerId(group_name+"[RRTConnectkConfigDefault]")
+        self.move_group.set_planner_id("RRTConnectkConfigDefault")
         print("============ Initilization done! ")
 
     def get_current_pose(self):
@@ -104,19 +106,21 @@ class iiwa14():
 
         self.move_group.go(joint_goal, wait=True)
         self.move_group.stop()
+        self.rate.sleep()
         
 
     def go_to_pose_goal(self, pose_list, acc=ACCE, vel=VELO):
-        pose_goal = copy.deepcopy(pose_list)
+        # pose_goal = copy.deepcopy(pose_list)
         self.move_group.set_goal_position_tolerance(0.001)
         self.move_group.set_max_acceleration_scaling_factor(acc)
         self.move_group.set_max_velocity_scaling_factor(vel)
 
         self.move_group.set_start_state_to_current_state()
-        self.move_group.set_pose_target(pose_goal)
+        self.move_group.set_pose_target(pose_list)
         self.move_group.go(wait=True)
         self.move_group.stop()
         self.move_group.clear_pose_targets() #no such for joint
+        self.rate.sleep()
 
     
     def display_trajectory(self, plan):
